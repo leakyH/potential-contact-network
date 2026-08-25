@@ -1,0 +1,30 @@
+name: epidemic_pynew
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.11.8
+  - numpy=1.26.4
+  - pandas=2.2.1
+  - networkx=3.1
+  - matplotlib=3.8.0
+  - scipy=1.12.0
+  - pytorch=2.2.2
+  - pytorch-cuda=12.1
+  - scikit-learn=1.2.2
+  - geopandas=0.14.2
+  - shapely=2.0.1
+  - rtree=1.0.1
+  - basemap=1.4.1
+  - scienceplots=2.1.1
+  - imageio=2.34.0
+  - seaborn=0.13.2
+  - tqdm=4.65.0
+  - psutil=5.9.0
+  - line_profiler=4.1.1
+  - plotly=5.22.0
+  - pip
+  - pip:
+      - kaleido==0.2.1
