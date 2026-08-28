@@ -109,7 +109,7 @@ the data layout matches the experiment and plotting entry points.
   [American Community Survey table
   B01001](https://data.census.gov/) and the [Population Estimates
   Program](https://www.census.gov/programs-surveys/popest.html).
-- Combined Statistical Area mapping: U.S. Census Bureau [metropolitan and
+- Combined Statistical Area mapping: U.S. Census Bureau (optional, only used in an analysis in SI) [metropolitan and
   micropolitan delineation
   files](https://www.census.gov/programs-surveys/metro-micro/about/delineation-files.html).
 - Airport passenger data: U.S. Department of Transportation, Bureau of
