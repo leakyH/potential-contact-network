@@ -1,4 +1,4 @@
-# reproduction package for Restraining Epidemic Resurgence through Regulating Higher-Order Contact Networks in the United States
+# Repository for Restraining epidemic resurgence through higher-order mobility network regulation in the United States
 
 This repository contains the experiment code and Bash workflows for the formal
 experiments, the Fig. 4h and Fig. 5 main-result plots, and the toy-model
