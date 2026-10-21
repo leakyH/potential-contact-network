@@ -46,7 +46,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/scalars/", subdir_name, f"I_count_init{suffix}.png"),
         False,
         extraInfo={"sum": metrics.i_in_all, "reference": ref},
-        ref={"TheilL": metrics.i_theil_l},
+        ref={"TheilT": metrics.i_theil_t},
     )
     PlotSelectedScalar(
         metrics.selected,
@@ -55,7 +55,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/scalars/", subdir_name, f"I_ratio_init{suffix}.png"),
         True,
         extraInfo={"all": metrics.i_ratio_in_all, "reference": ref / np.sum(initpopulations)},
-        ref={"TheilL": metrics.i_theil_l},
+        ref={"TheilT": metrics.i_theil_t},
     )
     PlotSelectedScalar(
         metrics.selected,
@@ -78,7 +78,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/scalars/", subdir_name, f"S2E{suffix}.png"),
         True,
         extraInfo={"sum": metrics.s2e_in_all, "reference": ref},
-        ref={"TheilL": metrics.s2e_theil_l},
+        ref={"TheilT": metrics.s2e_theil_t},
     )
     PlotSelectedScalar(
         [],
@@ -87,7 +87,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/scalars/", subdir_name, f"I_tested_log{suffix}.png"),
         True,
         extraInfo={"sum": metrics.total_tested_i, "reference": ref},
-        ref={"TheilL": metrics.tested_i_theil_l},
+        ref={"TheilT": metrics.tested_i_theil_t},
     )
     PlotSelectedScalar(
         [],
@@ -96,7 +96,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/scalars/", subdir_name, f"I_tested_linear{suffix}.png"),
         False,
         extraInfo={"sum": metrics.total_tested_i, "reference": ref},
-        ref={"TheilL": metrics.tested_i_theil_l},
+        ref={"TheilT": metrics.tested_i_theil_t},
     )
     PlotSelectedScalar(
         [],
@@ -129,7 +129,7 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
     validate_data = np.hstack(
         [
             np.array(metrics.total_tested_i).reshape(-1, 1),
-            np.array(metrics.tested_i_theil_l).reshape(-1, 1),
+            np.array(metrics.tested_i_theil_t).reshape(-1, 1),
             metrics.daily_death,
         ]
     )
@@ -137,6 +137,6 @@ def write_scalar_outputs(metrics, towns_list, csa2county, initpopulations, subdi
         os.path.join("output/csvs/", subdir_name, f"validate_data{suffix}.csv"),
         validate_data,
         delimiter=",",
-        header="totalTestedI,TheilL,daily_death_y,daily_death_m,daily_death_o",
+        header="totalTestedI,TheilT,daily_death_y,daily_death_m,daily_death_o",
         comments="",
     )

@@ -334,21 +334,39 @@ def get_Gini(arr, pop=None, axis=None):
 
 
 def get_Theil_L(arr, pop, axis=None):
+    """Population-weighted L, excluding zero-case counties and renormalizing both shares."""
+    arr = np.asarray(arr)
+    pop = np.asarray(pop)
     assert (arr >= 0).all()
+    if axis is not None:
+        shape = [1] * arr.ndim
+        shape[axis] = pop.size
+        pop = pop.reshape(shape)
+    positive = arr > 0
+    retained_pop = np.where(positive, pop, 0)
     with np.errstate(divide="ignore", invalid="ignore"):
-        if axis is None:
-            y = arr / sum(arr)
-            p = pop / sum(pop)
-            temp = np.log(p / y)
-            temp[np.isinf(temp)] = 0
-            temp = p * temp
-            return sum(temp)
         y = arr / np.sum(arr, axis=axis, keepdims=True)
-        p = pop / np.sum(pop)
-        temp = np.log(p / y)
-        temp[np.isinf(temp)] = 0
-        temp = p * temp
-        return np.sum(temp, axis=axis)
+        p = retained_pop / np.sum(retained_pop, axis=axis, keepdims=True)
+        terms = np.where(positive, p * np.log(p / y), 0)
+        result = np.sum(terms, axis=axis)
+    return np.where(np.any(positive, axis=axis), result, np.nan)
+
+
+def get_Theil_T(arr, pop, axis=None):
+    """Case-weighted T on all counties; zero cases contribute zero. All-zero slices return NaN."""
+    arr = np.asarray(arr)
+    pop = np.asarray(pop)
+    assert (arr >= 0).all()
+    if axis is not None:
+        shape = [1] * arr.ndim
+        shape[axis] = pop.size
+        pop = pop.reshape(shape)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        y = arr / np.sum(arr, axis=axis, keepdims=True)
+        p = pop / np.sum(pop, axis=axis, keepdims=True)
+        terms = np.where(arr > 0, y * np.log(y / p), 0)
+        result = np.sum(terms, axis=axis)
+    return np.where(np.any(arr > 0, axis=axis), result, np.nan)
 
 
 def get_sum_from_lists(arr, list_of_list):

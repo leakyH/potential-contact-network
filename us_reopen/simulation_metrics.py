@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from us_reopen.numeric import get_Gini, get_Theil_L, get_sum_from_dict
+from us_reopen.numeric import get_Gini, get_Theil_T, get_sum_from_dict
 
 
 @dataclass
@@ -24,7 +24,7 @@ class SimulationMetrics:
     i_in_selected: list = field(init=False)
     i_in_all: list = field(default_factory=list)
     i_gini: list = field(default_factory=list)
-    i_theil_l: list = field(default_factory=list)
+    i_theil_t: list = field(default_factory=list)
     i_ratio_in_all: list = field(default_factory=list)
     s_in_all: list = field(default_factory=list)
     s_ratio_in_all: list = field(default_factory=list)
@@ -40,8 +40,8 @@ class SimulationMetrics:
     total_tested_i: list = field(default_factory=list)
     s2e_ratio_in_all: list = field(default_factory=list)
     s2e_gini: list = field(default_factory=list)
-    s2e_theil_l: list = field(default_factory=list)
-    tested_i_theil_l: list = field(default_factory=list)
+    s2e_theil_t: list = field(default_factory=list)
+    tested_i_theil_t: list = field(default_factory=list)
     largest_s2e: np.ndarray = field(init=False)
     largest_s2e_date: np.ndarray = field(init=False)
     largest_s2e_csa: np.ndarray = field(init=False)
@@ -95,7 +95,7 @@ class SimulationMetrics:
         self.i_ratio_in_all.append(towns[:, :, [status2id["I"]]].sum() / population.sum())
         self.i_in_all.append(towns[:, :, [status2id["I"]]].sum())
         self.i_gini.append(get_Gini(towns[:, :, status2id["I"]].sum(axis=1) / self.initpopulations, self.initpopulations))
-        self.i_theil_l.append(get_Theil_L(towns[:, :, status2id["I"]].sum(axis=1), self.initpopulations))
+        self.i_theil_t.append(get_Theil_T(towns[:, :, status2id["I"]].sum(axis=1), self.initpopulations))
         self.s_ratio_in_all.append(towns[:, :, [status2id["S"]]].sum() / population.sum())
         self.p_ratio_in_all.append(towns[:, :, [status2id["P"]]].sum() / population.sum())
         self.r_ratio_in_all.append(towns[:, :, [status2id["R"]]].sum() / population.sum())
@@ -136,8 +136,8 @@ class SimulationMetrics:
         self.total_tested_i.append(tested_by_region.sum())
         self.s2e_ratio_in_all.append(s2e.sum() / population.sum())
         self.s2e_gini.append(get_Gini(s2e.sum(axis=1) / self.initpopulations, self.initpopulations))
-        self.s2e_theil_l.append(get_Theil_L(s2e.sum(axis=1), self.initpopulations))
-        self.tested_i_theil_l.append(get_Theil_L(tested_by_region, self.initpopulations))
+        self.s2e_theil_t.append(get_Theil_T(s2e.sum(axis=1), self.initpopulations))
+        self.tested_i_theil_t.append(get_Theil_T(tested_by_region, self.initpopulations))
         county_s2e = s2e.sum(axis=1)
         self.largest_s2e_date[county_s2e > self.largest_s2e] = day_index
         self.largest_s2e[county_s2e > self.largest_s2e] = county_s2e[county_s2e > self.largest_s2e]
