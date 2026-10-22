@@ -1,8 +1,8 @@
 # Repository for Higher-order coupling informs adaptive contagion regulation in mobility networks
 
-This repository contains the experiment code and Bash workflows for the formal
-experiments, the Fig. 4h and Fig. 5 main-result plots, and the toy-model
-experiment. The plot-ready experiment outputs are not stored in this Git
+This repository contains the experiment code and Bash workflows for the toy-model
+experiments, formal experiments, and the main-result plots in Fig. 4h and Fig. 5.
+The plot-ready experiment outputs are not stored in this Git
 repository; they are provided in the Zenodo reproduction archive.
 
 ## Contents
