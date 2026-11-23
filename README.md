@@ -1,4 +1,4 @@
-# Repository for Higher-order coupling informs adaptive contagion regulation in mobility networks
+# Repository for Higher-order coupling through human interactions informs adaptive contagion regulation in networks
 
 This repository contains the experiment code and Bash workflows for the toy-model
 experiments, formal experiments, and the main-result plots in Fig. 4h and Fig. 5.
